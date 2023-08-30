@@ -27,7 +27,9 @@ import Animated, {
 //#region dependencies
 import { Portal } from '@gorhom/portal';
 import { nanoid } from 'nanoid/non-secure';
-import * as Haptics from 'expo-haptics';
+import ReactNativeHapticFeedback, {
+  HapticFeedbackTypes,
+} from 'react-native-haptic-feedback';
 //#endregion
 
 //#region utils & types
@@ -106,17 +108,19 @@ const HoldItemComponent = ({
     const style = !hapticFeedback ? 'Medium' : hapticFeedback;
     switch (style) {
       case `Selection`:
-        Haptics.selectionAsync();
+        ReactNativeHapticFeedback.trigger(HapticFeedbackTypes.soft);
         break;
       case `Light`:
       case `Medium`:
       case `Heavy`:
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle[style]);
+        ReactNativeHapticFeedback.trigger(HapticFeedbackTypes.impactLight);
         break;
       case `Success`:
       case `Warning`:
       case `Error`:
-        Haptics.notificationAsync(Haptics.NotificationFeedbackType[style]);
+        ReactNativeHapticFeedback.trigger(
+          HapticFeedbackTypes.notificationSuccess
+        );
         break;
       default:
     }
