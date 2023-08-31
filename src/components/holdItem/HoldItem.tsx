@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from 'react';
-import { ViewProps } from 'react-native';
+import { ViewProps, Text } from 'react-native';
 
 //#region reanimated & gesture handler
 import {
@@ -423,6 +423,8 @@ const HoldItemComponent = ({
   }, [overlayGestureEvent]);
   //#endregion
 
+  console.log('render');
+
   //#region render
   return (
     <>
@@ -440,6 +442,7 @@ const HoldItemComponent = ({
         >
           <PortalOverlay />
           {children}
+          <Text>test</Text>
         </Animated.View>
       </Portal>
     </>
