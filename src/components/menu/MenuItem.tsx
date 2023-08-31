@@ -41,11 +41,12 @@ const MenuItemComponent = ({ item, isLast }: MenuItemComponentProps) => {
   const handleOnPress = useCallback(() => {
     if (!item.isTitle) {
       const params = menuProps.value.actionParams[item.text] || [];
+      console.log({ params });
       if (item.onPress) item.onPress(...params);
       state.value = CONTEXT_MENU_STATE.END;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state, item]);
+  }, [item, menuProps.value.actionParams]);
 
   console.log('item', item);
 
