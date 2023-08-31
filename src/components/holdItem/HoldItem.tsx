@@ -133,6 +133,10 @@ const HoldItemComponent = ({
     if (!ctx.didMeasureLayout) {
       const measured = measure(containerRef);
 
+      if (measured === null) {
+        return;
+      }
+
       itemRectY.value = measured.pageY;
       itemRectX.value = measured.pageX;
       itemRectHeight.value = measured.height;
@@ -422,8 +426,6 @@ const HoldItemComponent = ({
     );
   }, [overlayGestureEvent]);
   //#endregion
-
-  console.log('render');
 
   //#region render
   return (

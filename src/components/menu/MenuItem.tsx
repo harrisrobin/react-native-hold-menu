@@ -39,15 +39,30 @@ const MenuItemComponent = ({ item, isLast }: MenuItemComponentProps) => {
   }, [theme, item]);
 
   const handleOnPress = useCallback(() => {
+    console.log({ menuProps, item });
     if (!item.isTitle) {
-      const params = menuProps.value.actionParams[item.text] || [];
-      if (item.onPress) item.onPress(...params);
+      // const params = menuProps.value.actionParams[item.text] || [];
+      // if (item.onPress) item.onPress(...params);
       state.value = CONTEXT_MENU_STATE.END;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, item]);
 
   console.log('item', item);
+  console.log({
+    AnimatedIcon,
+    typeofIcon: typeof item.icon,
+    menuProps,
+  });
+
+  const renderIcon = (icon: any) => {
+    if (typeof icon === 'string' && AnimatedIcon) {
+      return <AnimatedIcon name={icon} size={18} style={textColor} />;
+    } else if (typeof icon === 'function') {
+      return icon();
+    }
+    return null;
+  };
 
   return (
     <>
@@ -64,13 +79,7 @@ const MenuItemComponent = ({ item, isLast }: MenuItemComponentProps) => {
         >
           {item.text}
         </Animated.Text>
-        {!item.isTitle &&
-          item.icon &&
-          (AnimatedIcon && typeof item.icon === 'string' ? (
-            <AnimatedIcon name={item.icon} size={18} style={textColor} />
-          ) : typeof item.icon === 'function' ? (
-            item.icon()
-          ) : null)}
+        {!item.isTitle && item.icon && renderIcon(item.icon)}
       </AnimatedTouchable>
       {item.withSeparator && <Separator />}
     </>
