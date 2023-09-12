@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    backgroundColor: 'transparent',
   },
   menuItem: {
     width: '100%',
@@ -35,6 +36,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingHorizontal: styleGuide.spacing * 2,
     paddingVertical: styleGuide.spacing * 1.25,
+    borderRadius: styleGuide.spacing * 1.5,
   },
   border: {
     borderBottomWidth: 1,
