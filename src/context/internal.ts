@@ -1,12 +1,12 @@
 import { createContext } from 'react';
-import type Animated from 'react-native-reanimated';
+import { SharedValue } from 'react-native-reanimated';
 import type { CONTEXT_MENU_STATE } from '../constants';
 import { MenuInternalProps } from '../components/menu/types';
 
 export type InternalContextType = {
-  state: Animated.SharedValue<CONTEXT_MENU_STATE>;
-  theme: Animated.SharedValue<'light' | 'dark'>;
-  menuProps: Animated.SharedValue<MenuInternalProps>;
+  state: SharedValue<CONTEXT_MENU_STATE>;
+  theme: SharedValue<'light' | 'dark'>;
+  menuProps: SharedValue<MenuInternalProps>;
   safeAreaInsets?: {
     top: number;
     right: number;

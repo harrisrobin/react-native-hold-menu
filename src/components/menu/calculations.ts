@@ -1,4 +1,4 @@
-import Animated from 'react-native-reanimated';
+import { SharedValue } from 'react-native-reanimated';
 
 import { MENU_WIDTH } from '../../constants';
 import {
@@ -10,9 +10,7 @@ import {
 } from './constants';
 import type { MenuInternalProps } from './types';
 
-export const leftOrRight = (
-  menuProps: Animated.SharedValue<MenuInternalProps>
-) => {
+export const leftOrRight = (menuProps: SharedValue<MenuInternalProps>) => {
   'worklet';
 
   const anchorPositionHorizontal = menuProps.value.anchorPosition.split('-')[1];
