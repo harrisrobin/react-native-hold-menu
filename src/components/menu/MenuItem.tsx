@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { TouchableOpacity } from 'react-native';
-import Animated, { useAnimatedStyle } from 'react-native-reanimated';
+import Animated, { runOnJS, useAnimatedStyle } from 'react-native-reanimated';
 
 import Separator from './Separator';
 import styles from './styles';
@@ -41,11 +41,15 @@ const MenuItemComponent = ({ item, isLast }: MenuItemComponentProps) => {
   const handleOnPress = useCallback(() => {
     if (!item.isTitle) {
       const params = menuProps.value.actionParams[item.text] || [];
-      if (item.onPress) item.onPress(...params);
+      if (item.onPress) {
+        // item.onPress(...params);
+        runOnJS(item.onPress)(...params);
+      }
+
       state.value = CONTEXT_MENU_STATE.END;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [item, menuProps.value.actionParams]);
+  }, [item]);
 
   return (
     <>

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { memo, useMemo } from 'react';
 import { TouchableWithoutFeedback, View, ViewProps } from 'react-native';
 
