@@ -15,7 +15,7 @@ import { InternalContext } from '../../context/internal';
 import { HoldMenuProviderProps } from './types';
 import { StateProps, Action } from './reducer';
 import { CONTEXT_MENU_STATE } from '../../constants';
-import { MenuInternalProps } from '../menu/types';
+import { MenuInternalProps, MenuItemProps } from '../menu/types';
 import Menu from '../menu';
 
 export interface Store {
@@ -52,6 +52,8 @@ const ProviderComponent = ({
     actionParams: {},
   });
 
+  const [items, setItems] = React.useState<MenuItemProps[]>([]);
+
   useEffect(() => {
     theme.value = selectedTheme || 'light';
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -85,8 +87,10 @@ const ProviderComponent = ({
         left: 0,
         right: 0,
       },
+      items,
+      setItems,
     }),
-    [state, theme, menuProps, safeAreaInsets]
+    [state, theme, menuProps, safeAreaInsets, setItems, items]
   );
 
   return (

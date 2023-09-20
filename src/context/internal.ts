@@ -1,7 +1,7 @@
-import { createContext } from 'react';
+import { createContext, Dispatch, SetStateAction } from 'react';
 import { SharedValue } from 'react-native-reanimated';
 import type { CONTEXT_MENU_STATE } from '../constants';
-import { MenuInternalProps } from '../components/menu/types';
+import { MenuInternalProps, MenuItemProps } from '../components/menu/types';
 
 export type InternalContextType = {
   state: SharedValue<CONTEXT_MENU_STATE>;
@@ -13,6 +13,8 @@ export type InternalContextType = {
     bottom: number;
     left: number;
   };
+  items: MenuItemProps[];
+  setItems: Dispatch<SetStateAction<MenuItemProps[]>>;
 };
 
 // @ts-ignore

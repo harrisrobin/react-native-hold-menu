@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { memo, useMemo } from 'react';
+import React, { memo, useEffect, useMemo } from 'react';
 import { TouchableWithoutFeedback, View, ViewProps } from 'react-native';
 
 //#region reanimated & gesture handler
@@ -93,7 +93,7 @@ const HoldItemComponent = ({
   anchorEdge = 'top',
 }: HoldItemProps) => {
   //#region hooks
-  const { state, menuProps, safeAreaInsets } = useInternal();
+  const { state, menuProps, safeAreaInsets, setItems } = useInternal();
   const deviceOrientation = useDeviceOrientation();
   //#endregion
 
@@ -132,6 +132,10 @@ const HoldItemComponent = ({
   const containerRef = useAnimatedRef<Animated.View>();
   const previewRef = useAnimatedRef<Animated.View>();
   //#endregion
+
+  useEffect(() => {
+    setItems(items);
+  }, [items, setItems]);
 
   //#region functions
   const hapticResponse = () => {

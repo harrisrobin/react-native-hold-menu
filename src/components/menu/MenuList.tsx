@@ -36,9 +36,7 @@ import { leftOrRight } from './calculations';
 const AnimatedView = Animated.createAnimatedComponent(BlurView);
 
 const MenuListComponent = () => {
-  const { state, theme, menuProps } = useInternal();
-
-  const [itemList, setItemList] = React.useState<MenuItemProps[]>([]);
+  const { state, theme, menuProps, items: itemList } = useInternal();
 
   const menuHeight = useDerivedValue(() => {
     const itemsWithSeparator = menuProps.value.items.filter(
@@ -49,7 +47,6 @@ const MenuListComponent = () => {
       itemsWithSeparator.length
     );
   }, [menuProps]);
-  const prevList = useSharedValue<MenuItemProps[]>([]);
 
   const messageStyles = useAnimatedStyle(() => {
     const itemsWithSeparator = menuProps.value.items.filter(
@@ -109,21 +106,6 @@ const MenuListComponent = () => {
   const animatedProps = useAnimatedProps(() => {
     return { tint: theme.value };
   }, [theme]);
-
-  const setter = (items: MenuItemProps[]) => {
-    setItemList(items);
-    prevList.value = items;
-  };
-
-  useAnimatedReaction(
-    () => menuProps.value.items,
-    _items => {
-      if (!deepEqual(_items, prevList.value)) {
-        runOnJS(setter)(_items);
-      }
-    },
-    [menuProps]
-  );
 
   return (
     <AnimatedView
